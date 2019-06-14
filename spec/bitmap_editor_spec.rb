@@ -85,5 +85,9 @@ describe BitmapEditor do
         bitmap_editor.run('L 2 2 A')
       end
     end
+
+    context 'L 1 1 B' do
+      it 'colours the pixel at (1, 1) the colour B'
+    end
   end
 end
