@@ -13,7 +13,8 @@ class BitmapEditor
       @image.create(width: width, height: height)
     when 'L'
       x = args[0].to_i
-      @image.paint_pixel(coordinate: OpenStruct.new(x: x, y: 1), colour: 'A')
+      y = args[1].to_i
+      @image.paint_pixel(coordinate: OpenStruct.new(x: x, y: y), colour: 'A')
     end
 
   end
@@ -63,6 +64,14 @@ describe BitmapEditor do
         expect(image).to receive(:paint_pixel).with(coordinate: OpenStruct.new(x: 2, y: 1), colour: 'A')
 
         bitmap_editor.run('L 2 1 A')
+      end
+    end
+
+    context 'L 2 2 A' do
+      it 'colours the pixel at (2, 2) the colour A' do
+        expect(image).to receive(:paint_pixel).with(coordinate: OpenStruct.new(x: 2, y: 2), colour: 'A')
+
+        bitmap_editor.run('L 2 2 A')
       end
     end
   end
