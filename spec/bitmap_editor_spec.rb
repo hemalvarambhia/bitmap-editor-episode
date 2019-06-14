@@ -1,13 +1,20 @@
+require 'ostruct'
 class BitmapEditor
   def initialize(image)
     @image = image
   end
 
   def run(command)
-    _, *args = command.split
-    width = args[0].to_i
-    height = args[1].to_i
-    @image.create(width: width, height: height)
+    type, *args = command.split
+    case type
+    when 'I'
+      width = args[0].to_i
+      height = args[1].to_i
+      @image.create(width: width, height: height)
+    when 'L'
+      @image.paint_pixel(coordinate: OpenStruct.new(x: 1, y: 1), colour: 'A')
+    end
+
   end
 end
 
@@ -36,6 +43,19 @@ describe 'Creating an image' do
       expect(image).to receive(:create).with(width: 3, height: 2)
 
       bitmap_editor.run('I 3 2')
+    end
+  end
+end
+
+describe 'Painting a pixel on the image' do
+  let(:image) { double(:image) }
+  let(:bitmap_editor) { BitmapEditor.new(image) }
+
+  context 'L 1 1 A' do
+    it 'colours the pixel at (1, 1) the colour A' do
+      expect(image).to receive(:paint_pixel).with(coordinate: OpenStruct.new(x: 1, y: 1), colour: 'A')
+
+      bitmap_editor.run('L 1 1 A')
     end
   end
 end
