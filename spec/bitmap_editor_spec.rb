@@ -63,10 +63,10 @@ describe BitmapEditor do
         bitmap_editor.run('L 1 1 B')
       end
     end
-  end
 
-  def coordinate(x, y)
-    OpenStruct.new(x: x, y: y)
+    def coordinate(x, y)
+      OpenStruct.new(x: x, y: y)
+    end
   end
 
   describe 'Displaying an image' do
