@@ -68,4 +68,15 @@ describe BitmapEditor do
   def coordinate(x, y)
     OpenStruct.new(x: x, y: y)
   end
+
+  describe 'Displaying an image' do
+    let(:image_display) { double(:image_display) }
+
+    it 'renders the image to a display' do
+      pending 'Next Episode'
+      expect(image_display).to receive(:show).with(image)
+
+      bitmap_editor.run('S')
+    end
+  end
 end
