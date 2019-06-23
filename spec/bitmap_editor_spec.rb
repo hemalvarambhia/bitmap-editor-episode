@@ -34,7 +34,7 @@ describe BitmapEditor do
   describe 'Painting a pixel on the image' do
     context 'L 1 1 A' do
       it 'colours the pixel at (1, 1) the colour A' do
-        expect(image).to receive(:paint_pixel).with(coordinate: OpenStruct.new(x: 1, y: 1), colour: 'A')
+        expect(image).to receive(:paint_pixel).with(coordinate: coordinate(1, 1), colour: 'A')
 
         bitmap_editor.run('L 1 1 A')
       end
@@ -42,7 +42,7 @@ describe BitmapEditor do
 
     context 'L 2 1 A' do
       it 'colours the pixel at (2, 1) the colour A' do
-        expect(image).to receive(:paint_pixel).with(coordinate: OpenStruct.new(x: 2, y: 1), colour: 'A')
+        expect(image).to receive(:paint_pixel).with(coordinate: coordinate(2, 1), colour: 'A')
 
         bitmap_editor.run('L 2 1 A')
       end
@@ -50,7 +50,7 @@ describe BitmapEditor do
 
     context 'L 2 2 A' do
       it 'colours the pixel at (2, 2) the colour A' do
-        expect(image).to receive(:paint_pixel).with(coordinate: OpenStruct.new(x: 2, y: 2), colour: 'A')
+        expect(image).to receive(:paint_pixel).with(coordinate: coordinate(2, 2), colour: 'A')
 
         bitmap_editor.run('L 2 2 A')
       end
@@ -58,10 +58,14 @@ describe BitmapEditor do
 
     context 'L 1 1 B' do
       it 'colours the pixel at (1, 1) the colour B' do
-        expect(image).to receive(:paint_pixel).with(coordinate: OpenStruct.new(x: 1, y: 1), colour: 'B')
+        expect(image).to receive(:paint_pixel).with(coordinate: coordinate(1, 1), colour: 'B')
 
         bitmap_editor.run('L 1 1 B')
       end
     end
+  end
+
+  def coordinate(x, y)
+    OpenStruct.new(x: x, y: y)
   end
 end
